@@ -10,7 +10,7 @@ https://script.google.com/macros/s/AKfycbwdhT1Iz6-NauT1xVYzn2o_12dG7o5Vpks-Z0nlp
 - **Font:** Space Grotesk · **Look:** white background, glowing purple, minimal
 - **Built with:** React (via CDN, no build step)
 
-## Repo contents
+## Repo content
 
 ```
 appscript/
