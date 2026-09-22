@@ -1,0 +1,9 @@
+# Source photos (already embedded in the HTML as data URIs)
+*.jpg
+*.jpeg
+*.png
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.tmp
