@@ -1,5 +1,4 @@
 # AI Dude — eCommerce Store Build (Landing Page + Lead Form)
-
 A minimalist, glowing-purple landing page for the **"Build & launch your
 eCommerce store in half a day"** offer. It collects leads (name, email, phone)
 and shows the full production build spec with a one-click copy.
