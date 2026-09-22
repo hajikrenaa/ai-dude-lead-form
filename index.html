@@ -102,10 +102,10 @@
   .shot{margin:0;display:flex;flex-direction:column;gap:14px}
   .shot .frame{
     position:relative;width:100%;aspect-ratio:3/3.55;border-radius:24px;overflow:hidden;
-    background:linear-gradient(168deg,#F4EDFF 0%,#E9DDFF 55%,#D8C5FF 100%);
+    background:#ffffff;
     box-shadow:0 30px 72px -26px var(--glow), 0 0 0 1px var(--line);
   }
-  .shot .glow{position:absolute;inset:auto -10% -22% -10%;height:72%;background:radial-gradient(58% 82% at 50% 100%, rgba(124,58,237,.22), transparent 72%);z-index:0}
+  .shot .glow{position:absolute;inset:auto -6% -26% -6%;height:60%;background:radial-gradient(62% 88% at 50% 100%, rgba(124,58,237,.34), rgba(124,58,237,.10) 46%, transparent 74%);z-index:0}
   .shot img{
     position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;
     object-fit:contain;object-position:center bottom;
@@ -188,8 +188,8 @@
     .hero-text{text-align:center;order:2}
     .shot{order:1}
     .shot .frame{max-width:320px;margin:0 auto}
-    .feats{align-items:center;max-width:320px;margin-inline:auto}
-    .feat{width:100%}
+    .feats{align-items:flex-start;max-width:340px;margin-inline:auto}
+    .feat{width:100%;text-align:left}
   }
   @media (max-width:460px){
     .wrap{padding-block:26px 52px}
