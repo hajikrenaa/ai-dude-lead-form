@@ -14,7 +14,7 @@ https://script.google.com/macros/s/AKfycbwdhT1Iz6-NauT1xVYzn2o_12dG7o5Vpks-Z0nlp
 
 ```
 appscript/
-  Code.gs          Server: serves the page + submitLead() writes to Google Sheet
+  Code.gs          Server: serves the page + submitLead() writes o Google Sheet
   Index.html       The landing page (form posts via google.script.run)
   appsscript.json  Web-app manifest (Asia/Kolkata, access: anyone)
   DEPLOY.md        Step-by-step deploy guide
