@@ -64,7 +64,15 @@ function submitLead(data) {
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone']);
     }
-    sheet.appendRow([new Date(), lead.name, lead.email, lead.phone]);
+    var row = sheet.getLastRow() + 1;
+    sheet.getRange(row, 1).setValue(new Date());
+    sheet.getRange(row, 2).setValue(lead.name);
+    sheet.getRange(row, 3).setValue(lead.email);
+    // Write the phone as PLAIN TEXT so a leading "+" is not treated as a
+    // formula (which shows #ERROR!) and long numbers don't become 9.1E+11.
+    var phoneCell = sheet.getRange(row, 4);
+    phoneCell.setNumberFormat('@');
+    phoneCell.setValue(lead.phone);
     return { ok: true };
   } finally {
     lock.releaseLock();
