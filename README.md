@@ -4,6 +4,9 @@ A minimalist, glowing-purple landing page for the **"Build & launch your
 eCommerce store in half a day"** offer. It collects leads (name, email, phone)
 and shows the full production build spec with a one-click copy.
 
+**Live form (Apps Script Web App):**
+https://script.google.com/macros/s/AKfycbwdhT1Iz6-NauT1xVYzn2o_12dG7o5Vpks-Z0nlpcnjV9n5K1WaJH5ddO_w4LsGuE5F/exec
+
 - **Font:** Space Grotesk · **Look:** white background, glowing purple, minimal
 - **Built with:** React (via CDN, no build step)
 
