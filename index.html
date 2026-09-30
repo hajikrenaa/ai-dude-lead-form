@@ -38,7 +38,7 @@
   .wrap{position:relative;max-width:920px;margin:0 auto;padding:0 20px;padding-block:34px 64px}
   .wash{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:min(1000px,120%);height:560px;background:radial-gradient(46% 52% at 80% 16%, rgba(157,92,255,.16), transparent 70%), radial-gradient(40% 46% at 14% 30%, var(--glow-soft), transparent 72%);pointer-events:none;z-index:0}
 
-  /* ---- scroll-to-prompt button ---- */
+  /* ---- scroll-to-procedure button ---- */
   .scrolltop{position:relative;z-index:2;display:flex;justify-content:center;margin-bottom:26px}
   .scrollbtn{
     display:inline-flex;align-items:center;gap:10px;font-family:var(--font);
@@ -81,17 +81,6 @@
     background:linear-gradient(150deg,var(--primary-2),var(--primary));box-shadow:0 7px 16px -2px var(--glow);
   }
   .feat .fi svg{width:15px;height:15px}
-
-  .price{
-    margin:24px auto 0;display:flex;flex-direction:column;align-items:center;gap:2px;width:max-content;max-width:100%;
-    padding:16px 30px;border-radius:18px;background:var(--chip);border:1px solid var(--line);
-    box-shadow:0 14px 38px var(--glow-soft);
-  }
-  .price .row{display:inline-flex;align-items:baseline;gap:8px}
-  .price .cur{font-size:20px;font-weight:500;color:var(--muted);transform:translateY(-9px)}
-  .price .amt{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1}
-  .price .gst{font-size:14px;font-weight:500;color:var(--muted)}
-  .price .note{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
 
   .callout{margin-top:18px;display:inline-flex;align-items:center;gap:12px;font-size:14.5px;color:var(--ink-soft);text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}
   .callout b{color:var(--ink);font-weight:600}
@@ -203,194 +192,154 @@
 <body>
 
 
-<!-- Full build spec, stored verbatim so the copy button hands over the exact prompt. -->
-<script type="text/plain" id="spec-src">Build a full-stack Diwali crackers (fireworks) e-commerce store, production-ready,
-deployed on a Hostinger VPS.
+<!-- Full build spec, stored verbatim so the copy button hands over the exact procedure. -->
+<script type="text/plain" id="spec-src">Build an AI agent that runs SEO, AEO and GEO for a client website on autopilot -
+audits, fixes, content and AI-visibility tracking - controlled from Telegram,
+with nothing going live on the site without the owner's approval.
 
 STACK
-- Frontend: Next.js 14+ (App Router), TypeScript, Tailwind CSS
-- Backend: Next.js API routes (or a separate Express API if you think it's cleaner
-  for this scale - explain your reasoning briefly before committing to one)
-- Database: PostgreSQL (Prisma as ORM)
-- Payments: Razorpay (live integration - I will provide real API keys via .env,
-  never hardcode any keys, use environment variables throughout, and never log
-  secret keys)
-- Email: Nodemailer via SMTP (credentials via env vars - I'll provide real SMTP
-  credentials)
+- Agent: Hermes Agent (Nous Research) with custom skills (one SKILL.md per task)
+- Toolkit: a Python 3.9+ command-line tool (`seo ...`) that does all measuring,
+  checking and writing, so every number comes from real data, never from the
+  model's memory. Stdlib only where possible.
+- Models: OpenAI (agent chat, article writing, images, ChatGPT checks),
+  Claude API (Claude checks), OpenRouter (Perplexity checks), Gemini optional
+- Interface: a private Telegram bot through the Hermes gateway
+- Client site: code on GitHub (Vite + React in this build), hosted on Vercel
+  (support Netlify, Cloudflare Pages, GitHub Pages, Firebase, cPanel, VPS too)
+- Data: one SQLite history file + dated JSON/Markdown/HTML reports per site
+- Google data: Search Console API via a read-only service account;
+  Bing Webmaster Tools connected by the owner
+- Client dashboard: static HTML + serverless API functions in a private
+  GitHub repo, deployed on Vercel
 
 CORE FEATURES (build in stages, confirm each stage works before moving to the next)
 
-1. PROJECT SETUP
-   - Scaffold Next.js + TypeScript + Tailwind project
-   - Set up Prisma with PostgreSQL, initial schema (below)
-   - .env.example documenting every required variable
-   - Clean folder structure: /app, /components, /lib, /prisma, /deploy
+1. TOOLKIT SETUP
+   - install script that copies skills + scripts into the agent's home and
+     adds a `seo` launcher, so the agent never types script paths
+   - one install = one client: a workspace folder with an auto-generated
+     AGENTS.md (client name, site, repo, dashboard, routing table)
+   - all saved paths relative to the workspace, so the install can move to a VPS
 
-2. DATABASE SCHEMA (Prisma)
-   - Product: id, name, description, price, category (sparklers, rockets,
-     flowerpots, chakras, combo-packs, etc.), imageUrl, stockQuantity, isActive
-   - Order: id, customerName, customerPhone, customerEmail, deliveryAddress,
-     totalAmount, paymentStatus (pending/paid/failed), razorpayOrderId,
-     razorpayPaymentId, createdAt
-   - OrderItem: id, orderId, productId, quantity, priceAtPurchase
-   - Seed script with realistic sample crackers products across categories
+2. CLIENT ONBOARDING WIZARD (`seo init`)
+   - interview one question at a time: brand, competitors, 15 buyer questions
+     people ask AI, hosting, repo, alerts, approver, background jobs
+   - guardrails: refuse placeholder competitors, invented prompts, unapproved
+     profiles; ask the user, never guess
+   - a checklist of every setup step (done / to do / skipped) that always
+     prints the NEXT step; steps that need a login (Telegram, GitHub, hosting,
+     Google, Bing, billing) are explained and verified, never done by the agent
+   - `seo doctor`: health check of keys, jobs, deploys, sitemap, robots.txt
 
-3. PRODUCT CATALOG
-   - Homepage: hero banner + product grid, filterable by category
-   - Product card: image, name, price, stock status, "Add to Cart"
-   - Fully responsive, mobile-first (most customers will order from phone)
-   - Handle out-of-stock state clearly (disable add-to-cart, show badge)
+3. TECHNICAL SEO AUDIT
+   - crawl up to 200 pages; ~45 checks across technical, on-page, AEO and speed
+   - score 0-100 with caps (a JavaScript-only site can never score high)
+   - prioritised fix list; reports in Markdown, HTML and JSON
 
-4. CART
-   - React Context or Zustand for cart state, persisted in localStorage
-   - Add/remove/update quantity, respect stock limits
-   - Cart drawer/page with line items, quantity controls, subtotal
+4. AI CRAWLER ACCESS CHECK (GEO)
+   - 19 bots: Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot and more
+   - check robots.txt AND a live request per bot user-agent (catches firewall
+     and CDN blocks)
+   - weekly; alert only when something changes
 
-5. CHECKOUT FLOW
-   - Collect customerName, phone, email, delivery address
-   - Server-side validation (required fields, phone format, email format) -
-     do not rely on client-side validation alone
-   - Create Order + OrderItems in DB with paymentStatus = "pending" BEFORE
-     opening Razorpay checkout
-   - Recalculate the total server-side from DB prices at order-creation time -
-     never trust a client-submitted total
+5. SITE FOUNDATION
+   - build-time prerendering so every page ships real HTML to bots
+   - per-page title, description, canonical and structured data
+   - sitemap.xml, robots.txt, a real 404 (noindex), a Markdown blog section
+   - host-specific config (no single-page-app catch-all that turns 404s into 200s)
+   - verify step: every page has words, H1, title, description, correct canonical
 
-6. RAZORPAY INTEGRATION (live)
-   - Backend: API route to create a Razorpay order (razorpay.orders.create)
-     using the server-calculated total, return order_id to frontend
-   - Frontend: Razorpay Checkout.js integration using that order_id
-   - Backend: payment verification API route - verify Razorpay signature via
-     HMAC (crypto), never trust a client-side "success" callback alone
-   - Set up a Razorpay webhook endpoint as the source of truth for payment
-     status (in addition to the checkout callback), verifying the webhook
-     signature, since callbacks can be missed or spoofed
-   - On verified successful payment: update Order to "paid", store
-     razorpayPaymentId, decrement product stockQuantity atomically (use a DB
-     transaction to prevent overselling under concurrent orders)
-   - Handle payment failure/cancellation: update order status accordingly,
-     show a clear error, don't leave ambiguous "pending" orders unresolved
+6. SAFE CHANGE WORKFLOW
+   - every change on its own branch -> host preview link -> approval -> merge
+   - approve/reject from Telegram or the dashboard; one-command rollback
+   - approval policy per site (e.g. titles/descriptions auto, FAQs need approval,
+     blog posts always need approval)
 
-7. ORDER CONFIRMATION + DELIVERY EMAIL
-   - On verified successful payment, send confirmation email to the customer:
-     order number, items, total paid, delivery address, delivery estimate
-   - Send a separate notification email to the store owner (admin email from
-     env) with full order details
-   - On-screen order confirmation page after payment success with order ID
-     and summary
-   - Make email sending resilient: if SMTP fails, log the error and don't
-     fail the whole order - the payment is already captured, so the order
-     must still be saved and visible to the admin
+7. AUTO-FIX ENGINE (SEO + AEO)
+   - from the audit: titles 30-60 chars, descriptions 110-160 chars, FAQ blocks
+     with FAQPage schema
+   - validators block marketing claims, vague words, invented numbers, missing
+     brand, dropped main keyword; the AI rewrites until it passes
+   - monthly job, 2 hours after the audit, only on a fresh audit
 
-8. ADMIN AREA
-   - /admin route, protected with authentication (do not ship this without
-     auth - use a simple username/password with hashed credentials, or
-     NextAuth if that's less work)
-   - List orders with status, search/filter, view order detail
-   - Ability to update product stock and add/edit/deactivate products
+8. BLOG ENGINE (AEO + GEO)
+   - topics from questions where AI does not mention the brand + Search Console
+     questions; skip published, pending and rejected topics
+   - web research with sources -> brief -> writer model with human-style rules
+   - checks: 700-2600 words, answer in the first 35-90 words, question headings,
+     3+ FAQs, internal links, a source link for every number, no AI-tell phrases
+   - hero image (WebP, brand colours); publish as a branch for approval
+   - schedule chosen by the owner (days + time)
 
-SECURITY (required, not optional - treat this as a checklist to satisfy, not
-general guidance)
+9. AI VISIBILITY TRACKER (GEO)
+   - ask each engine the buyer questions (ChatGPT 3 runs, Claude 1 run,
+     Perplexity, Gemini optional) with live web search
+   - measure: mention rate, citation rate, share of voice, what AI knows about
+     the brand, who AI recommends instead, which sites AI cites (third-party
+     listing targets vs competitors' own sites), what AI searched for
+   - cost estimate per engine BEFORE any paid run; free manual mode without keys
+   - the command prints an exact summary block the agent must forward word
+     for word (the agent never re-computes numbers)
 
-Secrets & config
-   - All secrets (DB URL, Razorpay keys, SMTP credentials, admin session
-     secret) via environment variables only - nothing hardcoded, nothing
-     ever logged (including in error logs/stack traces)
-   - .env is git-ignored; .env.example lists variable names only, no real
-     values
-   - Separate Razorpay test-mode and live-mode key handling - fail loudly at
-     startup if live keys look like test keys (e.g. key prefix check) so a
-     misconfigured deploy can't silently take real payments with test keys
-     or vice versa
+10. GOOGLE SEARCH CONSOLE
+   - daily sync: 16 months of daily totals; queries, pages, countries, devices,
+     search appearance for 7 / 28 / 90 days vs the previous period
+   - sitemap status; weekly per-page index status via URL Inspection (cached)
+   - ranking-drop alerts; publishes to the dashboard right after each sync
 
-Input handling & injection
-   - Validate and sanitize every user-submitted field server-side (checkout
-     form, admin forms) - reject unexpected types/lengths, not just "trim
-     and hope"
-   - All DB access through Prisma's parameterized queries - no raw SQL string
-     concatenation anywhere
-   - Sanitize/escape anything rendered from user input (product reviews if
-     added later, order notes, etc.) to prevent stored XSS
+11. CLIENT DASHBOARD
+   - password login; pages: Overview, Google Search, Indexing, AI Visibility,
+     Content, Activity, To-do (things only the client can do)
+   - interactive charts, approve/reject buttons, light and dark theme
+   - rebuilds and publishes itself; new app versions ship with the next publish
 
-Payment integrity
-   - Recalculate order total server-side from DB prices at order-creation
-     time - never trust a client-submitted amount
-   - Verify Razorpay payment signature via HMAC (crypto.createHmac) on both
-     the checkout callback AND the webhook - never mark an order "paid" on
-     an unverified client callback alone
-   - Verify the Razorpay webhook signature using the webhook secret before
-     processing any webhook payload
-   - Idempotency: a retried/duplicate webhook call for the same payment must
-     not double-decrement stock, double-send email, or create a duplicate
-     "paid" state - check current order status before acting
-   - Stock decrement on payment success must run inside a DB transaction
-     with row-level locking (or equivalent) to prevent overselling when two
-     customers buy the last unit concurrently
+12. AUTOMATION + ALERTS
+   - weekly: bot check, AI visibility, health check, blog (owner's schedule)
+   - daily: Google data; monthly: audit + auto-fix
+   - every 30 min: dashboard; every 5 min: dashboard approvals
+   - silent when nothing changed; Telegram alert when something needs attention
 
-API & rate limiting
-   - Rate limit checkout creation, payment verification, and admin login
-     routes specifically (these are the abuse targets) - not just a blanket
-     global limiter
-   - CSRF protection on state-changing routes if using cookie-based sessions
-   - Proper HTTP status codes and generic error messages to the client;
-     detailed errors go to server logs only, never to the response body in
-     production
-
-Admin area
-   - /admin routes protected by authentication on every route (middleware-
-     level, not per-page checks that are easy to forget on a new page)
-   - Passwords hashed with bcrypt/argon2, never stored or logged in plaintext
-   - Session cookies: httpOnly, secure, sameSite - no tokens in localStorage
-     for the admin session
-   - Lock out or throttle repeated failed admin login attempts
-
-Headers & transport
-   - Set standard security headers (Content-Security-Policy,
-     X-Content-Type-Options, X-Frame-Options, Referrer-Policy) via
-     next.config or middleware
-   - Code should assume HTTPS in production (secure cookies, no mixed
-     content) - actual SSL termination happens at Nginx/certbot on the VPS
-
-Dependencies & surface area
-   - No unused/unnecessary npm packages - smaller dependency surface
-   - Flag in DEPLOY.md: run npm audit before first production deploy and
-     after any dependency changes
-
-   After this stage, give me a short written summary of every security
-   control actually implemented (not just planned) so I can verify nothing
-   here was skipped.
+SECURITY (required, not optional - treat this as a checklist)
+   - API keys only in the agent's env file or the toolkit's secrets file, added
+     through a hidden prompt; never in chat, logs, URLs or git
+   - Search Console access read-only; dashboard GitHub token scoped to one repo
+   - nothing reaches the live site without a branch, a preview and an explicit
+     "approve"; the agent never approves its own work
+   - refuse to commit node_modules, build output or .env; refuse to ship when
+     the repo has unfinished changes
+   - dashboard: PBKDF2-hashed passwords, httpOnly + secure session cookie,
+     slowed login attempts, noindex headers, no secrets in the published data
+   - paid runs (AI visibility, writing, images) show the cost and wait for a yes
+   - the agent reports only what commands print; the user's words are never
+     treated as site names, file names or values
 
 TESTING
-   - Manual test checklist per stage, specific enough that I can verify each
-     feature works as built
-   - Explicit checklist for the full payment path: successful payment,
-     failed payment, cancelled payment, and a simulated webhook retry
-   - Flag any part of the flow that really should have automated tests before
-     go-live (e.g. stock-decrement concurrency, signature verification) even
-     if we're not writing the full suite in this pass
+   - manual test checklist per stage
+   - full approval path: approve, reject, rollback, dashboard approve click,
+     auto-policy change
+   - offline unit tests with fake API responses (no cost) for: fix validators,
+     blog checks, AI answer parsing, brand-knowledge detection, source split,
+     cost estimate, Search Console snapshot, hosting config, workspace paths
 
-DEPLOYMENT (Hostinger VPS)
-   - Production build script
-   - PM2 ecosystem config (ecosystem.config.js) to run the app as a managed,
-     auto-restarting process
-   - Nginx reverse-proxy config (/deploy/nginx.conf) - port 80/443 → app port,
-     with a note on enabling SSL via certbot
-   - DEPLOY.md with exact steps: clone repo, install deps, configure .env on
-     server, run Prisma migrations against the production DB, build, start
-     with PM2, configure Nginx + SSL
-   - Do not attempt to SSH or deploy anywhere yourself - prepare these files
-     only. I will handle the actual deploy to the VPS.
+DEPLOYMENT
+   - start on one always-on PC; move to a Linux VPS per client
+   - each client: own agent install, own AI keys (their billing), own Telegram
+     bot, own dashboard repo (seo-dashboard-<client>)
+   - background jobs created through the agent's scheduler, with approval
+   - DEPLOY.md: install agent, install toolkit, connect Telegram, run the wizard
 
 WORKING STYLE
-   - Go stage by stage. After each stage, stop, summarize what you built, give
-     me the manual test steps for that stage, and wait for me to confirm
-     before continuing.
-   - Keep commits small and scoped per stage.
-   - Clearly flag anything still using a placeholder value so I know what to
-     replace before this goes live to real customers.
+   - go stage by stage; after each stage stop, summarise, give the test steps,
+     and wait for confirmation
+   - keep commits small and scoped per stage
+   - clearly flag anything still using a placeholder
+   - never change the live site, create jobs or spend on paid APIs without
+     approval
 
-STYLE / UI
-   - Use Space Grotesk font, white background, glowing purple as the primary
-     colour, minimalistic UI. Use React.</script>
+STYLE / UI (dashboard)
+   - Space Grotesk font, glowing purple as the primary colour, minimal UI
+   - light and dark theme, mobile-friendly, charts that animate on load</script>
 
 <div id="root"></div>
 
@@ -519,7 +468,7 @@ STYLE / UI
       h("div", {className:"wash"}),
       h("div", {className:"scrolltop"},
         h("button", {className:"scrollbtn", type:"button", onClick:scrollToSpec},
-          "Scroll down for the prompt",
+          "Scroll down for the procedure",
           h("span", {className:"chev"}, Ic.chevron())
         )
       ),
@@ -537,14 +486,6 @@ STYLE / UI
           h("div", {className:"callout"},
             h("span", {className:"ic"}, Ic.phone()),
             h("span", null, "Starts with a ", h("b", null, "free 10-min 1:1"), " with AI Dude about your business.")
-          ),
-          h("div", {className:"price"},
-            h("div", {className:"row"},
-              h("span", {className:"cur"}, "₹"),
-              h("span", {className:"amt"}, "9,999"),
-              h("span", {className:"gst"}, "+ GST")
-            ),
-            h("div", {className:"note"}, "One flat price · everything included")
           )
         ),
         h("figure", {className:"shot"},
@@ -595,7 +536,7 @@ STYLE / UI
             copied ? h(F, null, Ic.check(), " Copied") : h(F, null, Ic.copy(), " Copy spec"))
         ),
         h("div", {className:"codebox"},
-          h("div", {className:"bar"}, h("i"), h("i"), h("i"), h("span", null, "ecommerce-build.prompt")),
+          h("div", {className:"bar"}, h("i"), h("i"), h("i"), h("span", null, "ai-seo-agent.procedure")),
           h("pre", {className:"code"}, specText)
         )
       )
